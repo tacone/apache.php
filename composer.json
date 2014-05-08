@@ -1,0 +1,22 @@
+{
+    "name": "tacone/ApachePhp",
+    "description": "Apache Parser for PHP",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "tacone",
+            "email": "known-only@to.me"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "tacone\\ApachePhp\\": "src/",
+            "tacone\\ApachePhp\\Test\\": "tests/"
+        }
+    },
+    "require": {
+        "phpunit/phpunit": "@stable"
+    },
+    "prefer-stable" : true,
+    "minimum-stability": "dev"
+}
