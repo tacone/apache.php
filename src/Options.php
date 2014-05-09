@@ -14,7 +14,22 @@ class Options extends \ArrayObject
     {
         $string = trim ($string);
         $array = $string ? explode(' ', $string) : array();
+        $this->fromArray($array);
+    }
+    public function toString()
+    {
+        return (string)$this;
+    }
+    public function fromArray(array $array = null)
+    {
+        $array = $array ?: [];
+        $array = array_filter($array);
         $this->exchangeArray($array);
+        return $this;
+    }
+    public function toArray()
+    {
+        return $this->getArrayCopy();
     }
     public function offsetSet($index, $value)
     {

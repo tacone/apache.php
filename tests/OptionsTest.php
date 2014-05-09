@@ -8,10 +8,51 @@ use tacone\ApachePhp\Options;
 class OptionsTest extends BaseTestCase
 {
 
-//	function fakeLine ()
-//	{
-//		return new \stdClass();
-//	}
+    public function testToFromArray()
+    {
+        $o = new Options();
+        $expected = ['example.net', 'www.example.net'];
+        $o->fromArray($expected);
+        $this->assertEquals($expected, $o->toArray());
+
+        $o = new Options();
+        $o->fromArray(null);
+        $this->assertEquals([], $o->toArray());
+    }
+
+    public function testToFromString()
+    {
+
+        $o = new Options();
+        $expected = 'example.net www.example.net';
+        $o->fromString($expected);
+        $this->assertEquals($expected, $o->toString());
+        $this->assertEquals($expected, (string)$o );
+        
+        $o = new Options();
+        $expected = '';
+        $o->fromString($expected);
+        $this->assertEquals($expected, $o->toString());
+        
+        $o = new Options();
+        $expected = ' '; //should be trimmed, thus empty
+        $o->fromString($expected);
+        $this->assertEquals('', $o->toString());
+        
+        $o = new Options();
+        $expected = 'example.net www.example.net';
+        $o->fromString(" ".$expected);
+        $this->assertEquals($expected, $o->toString());
+        $this->assertEquals($expected, (string)$o );
+        
+        // all options should be trimmed
+        $o = new Options();
+        $expected = 'example.net www.example.net';
+        $o->fromString(str_replace(" ", "  ",$expected));
+        $this->assertEquals($expected, $o->toString());
+        
+    }
+
     function testCount()
     {
         $o = new Options();
@@ -55,29 +96,6 @@ class OptionsTest extends BaseTestCase
 
     public function testSetItem()
     {
-        /*
-          line = FakeLine()
-          o = Options( line )
-          line.value = 'example.net www.example.net'
-          o[0] = 'annodomini.com'
-          self.assertEqual( o[0], 'annodomini.com' )
-          o[1] = 'www.annodomini.com'
-          self.assertEqual( o[1], 'www.annodomini.com' )
-          #empty values will cancel the index (and cause everything to scale)
-          line.value = 'example.net www.example.net'
-          o[0] = ''
-          self.assertEqual( o[0], 'www.example.net' )
-          line.value = 'example.net www.example.net'
-          o[0] = None
-          self.assertEqual( o[0], 'www.example.net' )
-          try:
-          o[1] = 'error.example.net'
-          self.assertFalse( 'expecting IndexError exception' )
-          except IndexError:
-          pass
-
-         */
-
         $o = new Options();
         $o->fromString('example.net www.example.net');
 
@@ -91,7 +109,7 @@ class OptionsTest extends BaseTestCase
         $o->fromString('example.net www.example.net');
         $o[0] = '';
         $this->assertEquals($o[0], 'www.example.net');
-        
+
         // empty values will cancel the index (and cause everything to scale)
         $o->fromString('example.net www.example.net');
         $o[0] = null;
