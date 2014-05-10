@@ -2,14 +2,13 @@
 
 namespace tacone\ApachePhp\Test;
 
-
 class BaseTestCase extends \PHPUnit_Framework_TestCase
 {
-    function testFake()
+    public function testFake()
     {
-		       /* $p = new Parser;
-		        $t = new BaseTestCase;
-		        die('sdds');*/
+               /* $p = new Parser;
+                $t = new BaseTestCase;
+                die('sdds');*/
     }
 
 }

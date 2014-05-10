@@ -26,33 +26,33 @@ class OptionsTest extends BaseTestCase
         $expected = 'example.net www.example.net';
         $o->fromString($expected);
         $this->assertEquals($expected, $o->toString());
-        $this->assertEquals($expected, (string)$o );
-        
+        $this->assertEquals($expected, (string) $o );
+
         $o = new Options();
         $expected = '';
         $o->fromString($expected);
         $this->assertEquals($expected, $o->toString());
-        
+
         $o = new Options();
         $expected = ' '; //should be trimmed, thus empty
         $o->fromString($expected);
         $this->assertEquals('', $o->toString());
-        
+
         $o = new Options();
         $expected = 'example.net www.example.net';
         $o->fromString(" ".$expected);
         $this->assertEquals($expected, $o->toString());
-        $this->assertEquals($expected, (string)$o );
-        
+        $this->assertEquals($expected, (string) $o );
+
         // all options should be trimmed
         $o = new Options();
         $expected = 'example.net www.example.net';
         $o->fromString(str_replace(" ", "  ",$expected));
         $this->assertEquals($expected, $o->toString());
-        
+
     }
 
-    function testCount()
+    public function testCount()
     {
         $o = new Options();
 

@@ -8,11 +8,11 @@ class Line
 {
 
     /**
-     * @var SimpleXMLElement 
+     * @var SimpleXMLElement
      */
     protected $element;
 
-    function __construct(SimpleXMLElement $element = null)
+    public function __construct(SimpleXMLElement $element = null)
     {
         $this->setElement($element ? : new SimpleXMLElement('<line source="" />'));
     }
@@ -26,7 +26,7 @@ class Line
     /**
      * @return string
      */
-    function getDirective()
+    public function getDirective()
     {
         return $this->element['directive'];
     }
@@ -34,18 +34,19 @@ class Line
     /**
      * @return string
      */
-    function getValue()
+    public function getValue()
     {
         return $this->element['value'];
     }
 
-    function setValue($value)
+    public function setValue($value)
     {
         $this->element['value'] = $value;
+
         return $this;
     }
 
-    function isChanged()
+    public function isChanged()
     {
         return !isset($this->element['source']);
     }

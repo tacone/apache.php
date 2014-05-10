@@ -18,13 +18,14 @@ class Options extends \ArrayObject
     }
     public function toString()
     {
-        return (string)$this;
+        return (string) $this;
     }
     public function fromArray(array $array = null)
     {
         $array = $array ?: [];
         $array = array_filter($array);
         $this->exchangeArray($array);
+
         return $this;
     }
     public function toArray()
