@@ -37,5 +37,4 @@ class Options extends \ArrayObject
         $array = array_filter($this->getArrayCopy());
         $this->exchangeArray(array_values($array));
     }
-
 }

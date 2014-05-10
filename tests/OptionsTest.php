@@ -2,7 +2,6 @@
 
 namespace tacone\ApachePhp\Test;
 
-use tacone\ApachePhp\Parser;
 use tacone\ApachePhp\Options;
 
 class OptionsTest extends BaseTestCase
