@@ -27,7 +27,8 @@ class Options extends \ArrayObject
         $array = $array ?: [];
         $array = array_filter($array);
         $this->exchangeArray($array);
-
+        $this->notifyWrite();
+        
         return $this;
     }
     public function toArray()

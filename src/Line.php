@@ -18,18 +18,21 @@ class Line
 
     public function __construct(SimpleXMLElement $element = null)
     {
-        $this->setElement($element ? : new SimpleXMLElement('<line source="" />'));
+        $this->initialize($element ? : new SimpleXMLElement('<line source="" />'));
+    }
+
+    protected function initialize(SimpleXMLElement $element)
+    {
+        $this->element = $element;
+        
         $this->options = new Options();
         $this->options->fromString($this->getRawValue());
         $this->options->onWrite(function(Options $options){
             $this->setRawValue( $options->toString() );
         });
-    }
-
-    protected function setElement(SimpleXMLElement $element)
-    {
-        $this->element = $element;
+        
         if ($this->isChanged()) throw new \LogicException('Line has no source');
+        
     }
 
     /**
@@ -73,8 +76,7 @@ class Line
 
     public function setValue($value)
     {
-        $this->setRawValue($value);
-
+        $this->getOptions()->fromArray([$value]);
         return $this;
     }
     /**
