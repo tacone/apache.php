@@ -62,5 +62,12 @@ class LineTest extends BaseTestCase
         $line = new Line($this->lineElement('DocumentRoot', '/var/www'));
         $this->assertEquals(1, count($line->getOptions()));
         
+        $line = new Line();
+        $this->assertEquals(0, count($line->getOptions()));
+        $line->getOptions()->append('one');
+        $this->assertEquals(1, count($line->getOptions()));
+        $line->getOptions()->append('two');
+        $this->assertEquals(2, count($line->getOptions()));
+        
     }
 }

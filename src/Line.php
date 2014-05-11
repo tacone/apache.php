@@ -11,6 +11,9 @@ class Line
      * @var SimpleXMLElement
      */
     protected $element;
+    /**
+     * @var Options 
+     */
     protected $options;
 
     public function __construct(SimpleXMLElement $element = null)
@@ -74,7 +77,9 @@ class Line
 
         return $this;
     }
-
+    /**
+     * @return Options
+     */
     public function getOptions ()
     {
         return $this->options;
