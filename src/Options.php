@@ -5,6 +5,8 @@ namespace tacone\ApachePhp;
 class Options extends \ArrayObject
 {
 
+    protected $writeCallbacks = [];
+    
     public function __toString()
     {
         return join(' ', iterator_to_array($this));
@@ -37,5 +39,15 @@ class Options extends \ArrayObject
         parent::offsetSet($index, $value);
         $array = array_filter($this->getArrayCopy());
         $this->exchangeArray(array_values($array));
+        $this->notifyWrite();
+    }
+    public function notifyWrite()
+    {
+        foreach ( $this->writeCallbacks as $callback ) $callback($this);
+    }
+    public function onWrite(callable $callback)
+    {
+        $this->writeCallbacks[] = $callback;
+        return $this;
     }
 }
