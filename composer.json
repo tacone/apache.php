@@ -15,7 +15,8 @@
         }
     },
     "require": {
-        "phpunit/phpunit": "@stable"
+        "phpunit/phpunit": "@stable",
+        "symfony/css-selector": "@stable"
     },
     "prefer-stable" : true,
     "minimum-stability": "dev"
