@@ -17,6 +17,21 @@ class OptionsTest extends BaseTestCase
         $o = new Options();
         $o->fromArray(null);
         $this->assertEquals([], $o->toArray());
+
+        $o = new Options();
+        $o2 = new Options();
+        $expected = ['example.net', 'www.example.net'];
+        $o2->fromArray($expected);
+        $o->fromArray($o2);
+        $this->assertEquals($expected, $o->toArray());
+
+        try {
+            $o = new Options();
+            $o->fromArray('this should throw an exception');
+            $this->fail('should have thrown \InvalidArgumentException');
+        } catch (\InvalidArgumentException $ex) {
+            // do nothing, it's ok
+        }
     }
 
     public function testToFromString()
@@ -26,7 +41,7 @@ class OptionsTest extends BaseTestCase
         $expected = 'example.net www.example.net';
         $o->fromString($expected);
         $this->assertEquals($expected, $o->toString());
-        $this->assertEquals($expected, (string) $o );
+        $this->assertEquals($expected, (string) $o);
 
         $o = new Options();
         $expected = '';
@@ -40,16 +55,15 @@ class OptionsTest extends BaseTestCase
 
         $o = new Options();
         $expected = 'example.net www.example.net';
-        $o->fromString(" ".$expected);
+        $o->fromString(" " . $expected);
         $this->assertEquals($expected, $o->toString());
-        $this->assertEquals($expected, (string) $o );
+        $this->assertEquals($expected, (string) $o);
 
         // all options should be trimmed
         $o = new Options();
         $expected = 'example.net www.example.net';
-        $o->fromString(str_replace(" ", "  ",$expected));
+        $o->fromString(str_replace(" ", "  ", $expected));
         $this->assertEquals($expected, $o->toString());
-
     }
 
     public function testCount()

@@ -78,8 +78,16 @@ class Options extends \ArrayObject
         return (string) $this;
     }
 
-    public function fromArray(array $array = null)
+    public function fromArray($array)
     {
+        if (!is_array($array) && is_a($array, '\Traversable')) {
+            $array = iterator_to_array($array);
+        }
+
+        if ($array && !is_array($array)) {
+            throw new \InvalidArgumentException("Array/Traversable expected");
+        }
+
         $array = $array ? : [];
         $array = array_filter($array);
         $this->exchangeArray($array);

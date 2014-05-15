@@ -87,6 +87,11 @@ class Line
         return $this->options;
     }
     
+    public function setOptions ( $array )
+    {
+        $this->options->fromArray($array);
+    }
+    
     public function isChanged()
     {
         return !isset($this->element['source']);

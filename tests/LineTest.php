@@ -60,6 +60,7 @@ class LineTest extends BaseTestCase
         $this->assertEquals(0, count($line->getOptions()));
         
         $line = new Line($this->lineElement('DocumentRoot', '/var/www'));
+        $this->assertInstanceOf('\tacone\ApachePhp\Options', $line->getOptions());
         $this->assertEquals(1, count($line->getOptions()));
         
         $line = new Line();
@@ -68,6 +69,7 @@ class LineTest extends BaseTestCase
         $this->assertEquals(1, count($line->getOptions()));
         $line->getOptions()->append('two');
         $this->assertEquals(2, count($line->getOptions()));
+        $this->assertInstanceOf('\tacone\ApachePhp\Options', $line->getOptions());
         
     }
 }
